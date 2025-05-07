@@ -5,76 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>El mejor sabor de Argentina</title>
   <style>
+    /* Reset básico */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body, html {
+    /* Estructura base */
+    html, body {
       height: 100%;
       font-family: 'Arial', sans-serif;
     }
 
+    /* Contenedor principal dividido horizontalmente */
     .container {
       display: flex;
       height: 100vh;
       width: 100vw;
+      flex-direction: row;
     }
 
+    /* Lado izquierdo: fondo con los colores de la bandera argentina */
     .left-side {
       flex: 1;
-      background: url('assets/andes.jpg') no-repeat center center;
-      background-size: cover;
-    }
-
-    .right-side {
-      flex: 1;
-      background-color: #4caf50;
+      background: linear-gradient(to bottom, #74ACDF, white, #74ACDF);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       padding-top: 40px;
-      color: white;
+      color: #003366;
       text-align: center;
     }
 
-    .logo img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-      margin-bottom: 20px;
+    /* Lado derecho: imagen de los Andes */
+    .right-side {
+      flex: 1;
+      background: url('assets/andes.jpg') no-repeat center center;
+      background-size: cover;
+      position: relative;
     }
 
+    /* Logo más grande */
+    .logo img {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      margin-bottom: 30px;
+    }
+
+    /* Texto principal más grande con sombra decorativa */
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      font-size: 5em;
+      margin-bottom: 20px;
+      text-shadow: 4px 4px 10px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    /* Responsividad para móviles */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left-side, .right-side {
+        width: 100%;
+        height: 50vh;
+      }
+
+      h1 {
+        font-size: 3em;
+      }
+
+      .logo img {
+        width: 200px;
+        height: 200px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Contenedor visual dividido -->
   <div class="container">
-    <div class="left-side"></div>
-    <div class="right-side">
+    <!-- Lado izquierdo: fondo celeste-blanco-celeste, logo y texto -->
+    <div class="left-side">
       <div class="logo">
         <img src="assets/logo.png" alt="Logo parrilla y vino argentino">
       </div>
       <h1>El mejor sabor de Argentina</h1>
     </div>
+
+    <!-- Lado derecho: imagen de los Andes (donde flota el bot) -->
+    <div class="right-side"></div>
   </div>
 
-  <!-- Botpress Webchat Scripts -->
+  <!-- Scripts del bot -->
   <script src="https://cdn.botpress.cloud/webchat/v2.4/inject.js"></script>
   <script src="https://files.bpcontent.cloud/2025/05/06/03/20250506032355-NY4Y52RW.js"></script>
 
-  <!-- Abrir chat automáticamente al cargar -->
+  <!-- Inicialización forzada del bot -->
   <script>
     window.botpressWebChat.init({
-      onInit: function() {
+      hostUrl: "https://cdn.botpress.cloud/webchat/v2.4",
+      messagingUrl: "https://messaging.botpress.cloud",
+      clientId: "20250506032355-NY4Y52RW",
+      botName: "Chef Zenón",
+      enableConversationDeletion: true,
+      showPoweredBy: false,
+      hideWidget: false,
+      layoutWidth: "100%",
+      containerWidth: "100%",
+      theme: "green",
+      botId: "botpress-webchat",
+      onInit: function () {
+        // Apertura automática al inicializar
         window.botpressWebChat.open();
+
+        // Refuerzo con retardo para evitar bloqueos por carga
+        setTimeout(() => {
+          window.botpressWebChat.open();
+        }, 500);
       }
     });
   </script>
